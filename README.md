@@ -20,6 +20,21 @@ sequenceDiagram
     Note over Legacy_DB, Vectis: Internal Network (Safe Zone)
     Vectis->>Legacy_DB: 1. Poll for Changes (Read-Only)
     Legacy_DB-->>Vectis: 2. Return Data Payload
+
+📋 Compliance
+Audit Trail: All extraction events are logged locally to ./logs/audit.log for internal IT review.
+
+Dependency-Free: Built using standard libraries to avoid "Supply Chain Attacks" via compromised npm/pip packages.
+
+
+***
+
+**Why this works:**
+1.  **"No Inbound Ports":** This is the magic phrase that makes IT Directors relax.
+2.  **"Read-Only":** This proves you won't brick their database (the "Phantom Inventory" fear).
+3.  **The Diagram:** It looks like real engineering.
+
+Update the README. Then tell me when you are ready to load the **Logistics** list (Batch 3). We have truckers to save.
     
     Note over Vectis: 3. Sanitize & Serialize (JSON)
     

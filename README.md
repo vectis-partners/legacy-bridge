@@ -21,6 +21,7 @@ sequenceDiagram
     Vectis->>Legacy_DB: 1. Poll for Changes (Read-Only)
     Legacy_DB-->>Vectis: 2. Return Data Payload
 ```
+
 📋 Compliance
 Audit Trail: All extraction events are logged locally to ./logs/audit.log for internal IT review.
 
@@ -34,10 +35,3 @@ Dependency-Free: Built using standard libraries to avoid "Supply Chain Attacks" 
 2.  **"Read-Only":** This proves you won't brick their database (the "Phantom Inventory" fear).
 3.  **The Diagram:** It looks like real engineering.
 
-Update the README. Then tell me when you are ready to load the **Logistics** list (Batch 3). We have truckers to save.
-    
-    Note over Vectis: 3. Sanitize & Serialize (JSON)
-    
-    Vectis->>Firewall: 4. Outbound HTTPS Post (TLS 1.2)
-    Firewall->>Cloud: 5. Forward Encrypted Traffic
-    Cloud-->>Vectis: 6. 200 OK (Confirm Receipt)

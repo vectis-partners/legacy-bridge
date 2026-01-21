@@ -20,7 +20,7 @@ sequenceDiagram
     Note over Legacy_DB, Vectis: Internal Network (Safe Zone)
     Vectis->>Legacy_DB: 1. Poll for Changes (Read-Only)
     Legacy_DB-->>Vectis: 2. Return Data Payload
-
+```
 📋 Compliance
 Audit Trail: All extraction events are logged locally to ./logs/audit.log for internal IT review.
 

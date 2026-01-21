@@ -1,19 +1,28 @@
-# Legacy Data Bridge (Vectis-Ops)
+## 🛡️ Security & Compliance Architecture
 
-**A zero-dependency exfiltration and integration kit for air-gapped or legacy Windows environments (Server 2008 / Win7+).**
+This bridge is designed for **"Hostile Integration"** environments (legacy on-premise Windows Servers, air-gapped networks, and strict firewall rules).
 
-### The Problem
-Modern APIs (REST/GraphQL) do not exist in legacy enterprise environments. Critical business data is often trapped in:
-* On-premise SQL Server 2005/2008 instances
-* Flat-file exports on local file systems
-* Proprietary "Black Box" ERPs with no external connectivity
+It operates on a **"Zero-Trust / Outbound-Only"** model.
 
-### The Solution
-This toolkit provides a "Living off the Land" approach to extraction. It uses native PowerShell (v2.0 compatible) to detect, capture, and securely bridge data to modern cloud infrastructure via TLS 1.2, without requiring software installation or complex firewall changes.
+### 🔒 Operational Security
+* **No Inbound Ports:** The script does *not* require opening port 80/443 on the corporate firewall. It is strictly an outbound agent.
+* **Read-Only by Default:** The SQL queries and File System watchers are configured to run with `SELECT` / `READ` permissions only to prevent data corruption.
+* **Ephemeral Memory:** No data is stored on the local disk. Payloads are constructed in RAM, encrypted, transmitted, and immediately discarded.
 
-### Components
-* **Bridge (PowerShell):** ~4KB agent. Runs in user-space. Watches for report generation/file IO. Handles retry logic and HTTPS transport.
-* **Receiver (Python/Flask):** Lightweight C2 endpoint that accepts, sanitizes, and structures the incoming legacy data for modern consumption.
+### 🏗️ Integration Logic (Sequence Diagram)
+```mermaid
+sequenceDiagram
+    participant Legacy_DB as Legacy SQL/File Sys
+    participant Vectis as Vectis Bridge (Local)
+    participant Firewall as Corporate Firewall
+    participant Cloud as Modern API Endpoint
 
-### Usage
-*Intended for Forward Deployed Engineering & Implementation teams dealing with high-friction on-premise integrations.*
+    Note over Legacy_DB, Vectis: Internal Network (Safe Zone)
+    Vectis->>Legacy_DB: 1. Poll for Changes (Read-Only)
+    Legacy_DB-->>Vectis: 2. Return Data Payload
+    
+    Note over Vectis: 3. Sanitize & Serialize (JSON)
+    
+    Vectis->>Firewall: 4. Outbound HTTPS Post (TLS 1.2)
+    Firewall->>Cloud: 5. Forward Encrypted Traffic
+    Cloud-->>Vectis: 6. 200 OK (Confirm Receipt)

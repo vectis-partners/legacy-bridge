@@ -1,0 +1,9 @@
+Instructions:
+
+Save the code above as bridge.ps1.
+
+Run the python receiver (python receiver.py) in one terminal.
+
+Run the powershell script (powershell -ExecutionPolicy Bypass -File bridge.ps1) in another.
+
+Drop a file in C:\LegacyApp\Exports (create the folder first).

@@ -30,8 +30,8 @@ Dependency-Free: Built using standard libraries to avoid "Supply Chain Attacks" 
 
 ***
 
-**Why this works:**
-1.  **"No Inbound Ports":** This is the magic phrase that makes IT Directors relax.
-2.  **"Read-Only":** This proves you won't brick their database (the "Phantom Inventory" fear).
-3.  **The Diagram:** It looks like real engineering.
+**Why this works for You:**
+1.  **"No Inbound Ports":** This is the magic phrase that makes IT Directors relax. This helps buy-in.
+2.  **"Read-Only":** This indicates you won't brick their database (the "Phantom Inventory" fear). Showcase control.
+3.  **The Diagram:** Engineering data from the start. A solid start for data extraction.
 
